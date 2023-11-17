@@ -1,6 +1,7 @@
 let currentValue = "",
   storedValue = "",
-  operator = "";
+  operator = "",
+  history = [];
 
 const historyDisplay = document.querySelector("#history");
 const currentDisplay = document.querySelector("#current");
@@ -40,7 +41,44 @@ function del() {
   }
 }
 
-function equals() {}
+function operate() {
+  let result = "";
+  switch (operator) {
+    case "+":
+      result = add(parseInt(storedValue), parseInt(currentValue));
+      break;
+    case "-":
+      result = subtract(parseInt(storedValue), parseInt(currentValue));
+      break;
+    case "x":
+      result = multiply(parseInt(storedValue), parseInt(currentValue));
+      break;
+    case "/":
+      result = divide(parseInt(storedValue), parseInt(currentValue));
+      break;
+  }
+  historyDisplay.innerText =
+    storedValue + " " + operator + " " + currentValue + " =";
+  storedValue = result;
+  currentDisplay.innerText = result;
+  currentValue = "";
+}
+
+function operatorClick(target) {
+  if (currentValue == "") {
+    currentValue = currentDisplay.innerText;
+  }
+  if (storedValue != "") {
+    operate();
+    operator = target;
+  } else {
+    operator = target;
+    storedValue = currentValue;
+    currentValue = "";
+    historyDisplay.innerText = storedValue + " " + operator;
+    currentDisplay.innerText = "0";
+  }
+}
 
 function numberClick(target) {
   if (currentValue == "") {
@@ -60,7 +98,7 @@ function onClick(target) {
       clear();
       break;
     case "=":
-      equals();
+      operate();
       break;
     case ".":
       break;
@@ -68,6 +106,7 @@ function onClick(target) {
     case "-":
     case "/":
     case "x":
+      operatorClick(target);
       break;
     // default case catches any numbers pressed to add to the current value
     default:
