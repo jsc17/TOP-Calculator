@@ -1,9 +1,9 @@
-let first = "",
-  second = "",
+let currentValue = 0,
   operator = "";
 
-const history = document.querySelector("#history");
-const current = document.querySelector("#current");
+const historyDisplay = document.querySelector("#history");
+const currentDisplay = document.querySelector("#current");
+const keyButtons = document.querySelectorAll("button");
 
 function add(num1, num2) {
   return num1 + num2;
@@ -24,8 +24,14 @@ function divide(num1, num2) {
 
 function clear() {}
 
+function del() {}
+
 function equals() {}
 
-function onClickNumber() {}
+function onClick(target) {}
 
-function onClickOperator() {}
+keyButtons.forEach((button) => {
+  button.addEventListener("click", function (e) {
+    onClick(e.target.innerText);
+  });
+});
