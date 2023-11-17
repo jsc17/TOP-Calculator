@@ -1,4 +1,5 @@
-let currentValue = 0,
+let currentValue = "",
+  storedValue = "",
   operator = "";
 
 const historyDisplay = document.querySelector("#history");
@@ -23,19 +24,32 @@ function divide(num1, num2) {
 }
 
 function clear() {
+  currentValue = "";
+  storedValue = "";
+  operator = "";
   historyDisplay.innerText = "";
   currentDisplay.innerHTML = "0";
 }
 
 function del() {
-  currentDisplay.innerText = currentDisplay.innerText.substring(
-    0,
-    currentDisplay.innerText.length - 1
-  );
-  if (currentDisplay.innerText.length == 0) currentDisplay.innerText = "0";
+  currentValue = currentValue.substring(0, currentValue.length - 1);
+  if (currentValue == "") {
+    currentDisplay.innerText = "0";
+  } else {
+    currentDisplay.innerText = currentValue;
+  }
 }
 
 function equals() {}
+
+function numberClick(target) {
+  if (currentValue == "") {
+    currentValue = target;
+  } else {
+    currentValue += target;
+  }
+  currentDisplay.innerText = currentValue;
+}
 
 function onClick(target) {
   switch (target) {
@@ -53,15 +67,11 @@ function onClick(target) {
     case "+":
     case "-":
     case "/":
-    case "X":
+    case "x":
       break;
     // default case catches any numbers pressed to add to the current value
     default:
-      if (currentDisplay.innerText == "0") {
-        currentDisplay.innerText = target;
-      } else {
-        currentDisplay.innerText += target;
-      }
+      numberClick(target);
       break;
   }
 }
