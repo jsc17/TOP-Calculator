@@ -64,7 +64,7 @@ function operate() {
   currentValue = "";
 }
 
-function operatorClick(target) {
+function clickOperator(target) {
   if (currentValue == "") {
     currentValue = currentDisplay.innerText;
   }
@@ -80,7 +80,7 @@ function operatorClick(target) {
   }
 }
 
-function numberClick(target) {
+function clickNumber(target) {
   if (currentValue == "") {
     currentValue = target;
   } else {
@@ -106,11 +106,11 @@ function onClick(target) {
     case "-":
     case "/":
     case "x":
-      operatorClick(target);
+      clickOperator(target);
       break;
     // default case catches any numbers pressed to add to the current value
     default:
-      numberClick(target);
+      clickNumber(target);
       break;
   }
 }
