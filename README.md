@@ -8,11 +8,11 @@ Project to create a web-based calculator from The Odin Projects Foundation Cours
 - Javascript
 - CSS
 
-  ##Tools
+##Tools
+- Visual Studio Code
 
-  - Visual Studio Code
+##Possible future additions
+- Improved design
+- Additional calculator buttons - Positive/Negative, exponent, square root, etc.
 
-  ##Possible future additions
-
-  - Improved design
-  - Additional calculator buttons - Positive/Negative, exponent, square root, etc.
+[Live Code](https://jsc17.github.io/TOP-Calculator/)
