@@ -30,6 +30,7 @@ function clear() {
   operator = "";
   historyDisplay.innerText = "";
   currentDisplay.innerHTML = "0";
+  history = [];
 }
 
 function del() {
@@ -42,6 +43,10 @@ function del() {
 }
 
 function operate() {
+  if (currentValue == "") {
+    currentValue = currentDisplay.innerText;
+  }
+  if (storedValue == "" || operator == "") return;
   let result = "";
   switch (operator) {
     case "+":
@@ -57,17 +62,16 @@ function operate() {
       result = divide(parseInt(storedValue), parseInt(currentValue));
       break;
   }
-  historyDisplay.innerText =
-    storedValue + " " + operator + " " + currentValue + " =";
+  history.push(storedValue + " " + operator + " " + currentValue + " = ");
+  historyDisplay.innerText = history.reduce((result, string) => {
+    return (result += string);
+  });
   storedValue = result;
   currentDisplay.innerText = result;
   currentValue = "";
 }
 
 function clickOperator(target) {
-  if (currentValue == "") {
-    currentValue = currentDisplay.innerText;
-  }
   if (storedValue != "") {
     operate();
     operator = target;
