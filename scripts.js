@@ -10,6 +10,9 @@ const operatorButtons = document.querySelectorAll(".button-op");
 const clearButton = document.querySelector("#clear");
 const delButton = document.querySelector("#del");
 const equalButton = document.querySelector("#equal");
+const decimalButton = document.querySelector("#decimal");
+
+// basic math functions
 
 function add(num1, num2) {
   return num1 + num2;
@@ -28,12 +31,13 @@ function divide(num1, num2) {
   return num1 / num2;
 }
 
+// button functions
+
 function clear() {
   currentValue = "";
   storedValue = "";
   operator = "";
   historyDisplay.innerText = "";
-  f;
   currentDisplay.innerHTML = "0";
   history = [];
 }
@@ -90,12 +94,6 @@ function clickOperator(target) {
 }
 
 function clickNumber(target) {
-  if (target == ".")
-    if (currentValue.includes(".")) {
-      return;
-    } else if (currentValue == "") {
-      currentValue += "0";
-    }
   if (currentValue == "") {
     currentValue = target;
   } else {
@@ -103,6 +101,20 @@ function clickNumber(target) {
   }
   currentDisplay.innerText = currentValue;
 }
+
+function clickDecimal() {
+  if (currentValue.includes(".")) {
+    return;
+  }
+  if (currentValue == "") {
+    currentValue = "0.";
+  } else {
+    currentValue += target;
+  }
+  currentDisplay.innerText = currentValue;
+}
+
+//button eventListeners
 
 keyButtons.forEach((button) => {
   button.addEventListener("click", function (e) {
@@ -119,9 +131,15 @@ operatorButtons.forEach((button) => {
 delButton.addEventListener("click", function (e) {
   del(e.target.innerText);
 });
+
 clearButton.addEventListener("click", function (e) {
   clear(e.target.innerText);
 });
+
 equalButton.addEventListener("click", function (e) {
-  operate(e.target.innerText);
+  operate();
+});
+
+decimalButton.addEventListener("click", function (e) {
+  clickDecimal();
 });
