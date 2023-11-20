@@ -5,7 +5,11 @@ let currentValue = "",
 
 const historyDisplay = document.querySelector("#history");
 const currentDisplay = document.querySelector("#current");
-const keyButtons = document.querySelectorAll("button");
+const keyButtons = document.querySelectorAll(".button-num");
+const operatorButtons = document.querySelectorAll(".button-op");
+const clearButton = document.querySelector("#clear");
+const delButton = document.querySelector("#del");
+const equalButton = document.querySelector("#equal");
 
 function add(num1, num2) {
   return num1 + num2;
@@ -29,6 +33,7 @@ function clear() {
   storedValue = "";
   operator = "";
   historyDisplay.innerText = "";
+  f;
   currentDisplay.innerHTML = "0";
   history = [];
 }
@@ -85,11 +90,12 @@ function clickOperator(target) {
 }
 
 function clickNumber(target) {
-  if(target == ".")
-    if(currentValue.includes(".")){
-      return;} else if (currentValue == ""){
-        currentValue += "0"
-      }
+  if (target == ".")
+    if (currentValue.includes(".")) {
+      return;
+    } else if (currentValue == "") {
+      currentValue += "0";
+    }
   if (currentValue == "") {
     currentValue = target;
   } else {
@@ -98,32 +104,24 @@ function clickNumber(target) {
   currentDisplay.innerText = currentValue;
 }
 
-function onClick(target) {
-  switch (target) {
-    case "DEL":
-      del();
-      break;
-    case "CE":
-      clear();
-      break;
-    case "=":
-      operate();
-      break;
-    case "+":
-    case "-":
-    case "/":
-    case "x":
-      clickOperator(target);
-      break;
-    // default case catches any numbers pressed to add to the current value
-    default:
-      clickNumber(target);
-      break;
-  }
-}
-
 keyButtons.forEach((button) => {
   button.addEventListener("click", function (e) {
-    onClick(e.target.innerText);
+    clickNumber(e.target.innerText);
   });
+});
+
+operatorButtons.forEach((button) => {
+  button.addEventListener("click", function (e) {
+    clickOperator(e.target.innerText);
+  });
+});
+
+delButton.addEventListener("click", function (e) {
+  del(e.target.innerText);
+});
+clearButton.addEventListener("click", function (e) {
+  clear(e.target.innerText);
+});
+equalButton.addEventListener("click", function (e) {
+  operate(e.target.innerText);
 });
