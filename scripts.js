@@ -50,16 +50,16 @@ function operate() {
   let result = "";
   switch (operator) {
     case "+":
-      result = add(parseInt(storedValue), parseInt(currentValue));
+      result = add(parseFloat(storedValue), parseFloat(currentValue));
       break;
     case "-":
-      result = subtract(parseInt(storedValue), parseInt(currentValue));
+      result = subtract(parseFloat(storedValue), parseFloat(currentValue));
       break;
     case "x":
-      result = multiply(parseInt(storedValue), parseInt(currentValue));
+      result = multiply(parseFloat(storedValue), parseFloat(currentValue));
       break;
     case "/":
-      result = divide(parseInt(storedValue), parseInt(currentValue));
+      result = divide(parseFloat(storedValue), parseFloat(currentValue));
       break;
   }
   history.push(storedValue + " " + operator + " " + currentValue + " = ");
@@ -85,6 +85,11 @@ function clickOperator(target) {
 }
 
 function clickNumber(target) {
+  if(target == ".")
+    if(currentValue.includes(".")){
+      return;} else if (currentValue == ""){
+        currentValue += "0"
+      }
   if (currentValue == "") {
     currentValue = target;
   } else {
@@ -103,8 +108,6 @@ function onClick(target) {
       break;
     case "=":
       operate();
-      break;
-    case ".":
       break;
     case "+":
     case "-":
