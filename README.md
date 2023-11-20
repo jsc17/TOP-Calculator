@@ -3,15 +3,15 @@
 Project to create a web-based calculator from The Odin Projects Foundation Course - [Project Calculator](https://www.theodinproject.com/lessons/foundations-calculator)
 
 
-##Built with
+## Built with
 - HTML
 - Javascript
 - CSS
 
-##Tools
+## Tools
 - Visual Studio Code
 
-##Possible future additions
+## Possible future additions
 - Improved design
 - Additional calculator buttons - Positive/Negative, exponent, square root, etc.
 
